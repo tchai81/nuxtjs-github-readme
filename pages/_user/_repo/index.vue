@@ -8,7 +8,7 @@
           </div>
       </template>
       <template v-else>
-        <div class="shadow p-4 pt-3 pb-3" v-html="readme"></div>
+        <div class="markdown-body shadow p-4 pt-3 pb-3" v-html="readme"></div>
       </template>
     </main>
   </section>
@@ -55,29 +55,3 @@ export default {
   }
 }
 </script>
-
-<style lang="less">
-// taken from highlight.js demo
-pre {
-  display: block;
-  padding: 9.5px;
-  margin: 0 0 10px;
-  font-size: 13px; // 14px to 13px
-  line-height: 1.42;
-  word-break: break-all;
-  word-wrap: break-word;
-  color: #333;
-  background-color: #f5f5f5;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-
-  code {
-    padding: 0;
-    font-size: inherit;
-    color: inherit;
-    white-space: pre-wrap;
-    background-color: transparent;
-    border-radius: 0;
-  }
-}
-</style>
