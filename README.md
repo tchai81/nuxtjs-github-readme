@@ -1,10 +1,14 @@
-# github-readme
+# Github Demo Project
 
 > A single page application that displays a user's Github projects and let's you view the project's README.
 
+## Live demo url
+
+<https://github-readme-fpkdjbmjyz.now.sh>
+
 ## Build Setup
 
-``` bash
+```bash
 # install dependencies
 $ npm install # Or yarn install
 
@@ -20,4 +24,3 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, checkout the [Nuxt.js docs](https://github.com/nuxt/nuxt.js).
-
