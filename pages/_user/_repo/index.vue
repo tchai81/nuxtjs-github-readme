@@ -2,14 +2,8 @@
   <section>
     <top-nav :title="name" :backAction="backAction" />
     <main role="main" class="p-3 container">
-      <template v-if="error">
-          <div class="alert alert-danger">
-            <strong>{{ error }}</strong>
-          </div>
-      </template>
-      <template v-else>
-        <div class="markdown-body shadow p-4 pt-3 pb-3" v-html="readme"></div>
-      </template>
+      <error :error="error" v-if="error"/>
+      <div v-else class="markdown-body shadow p-4 pt-3 pb-3" v-html="readme"></div>
     </main>
   </section>
 </template>
@@ -17,9 +11,11 @@
 <script>
 import { mapActions } from 'vuex'
 import TopNav from '~/components/nav'
+import Error from '~/components/error'
 export default {
   components: {
-    TopNav
+    TopNav,
+    Error
   },
   data() {
     return {
@@ -34,15 +30,15 @@ export default {
       }
     }
   },
-  methods: {
-    ...mapActions({
-      fetchReadmeByRepoAndUser: 'github/fetchReadmeByRepoAndUser'
-    })
-  },
   mounted() {
     this.fetchReadmeByRepoAndUser({
       name: this.name,
       user: this.user
+    })
+  },
+  methods: {
+    ...mapActions({
+      fetchReadmeByRepoAndUser: 'github/fetchReadmeByRepoAndUser'
     })
   },
   computed: {

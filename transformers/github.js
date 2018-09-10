@@ -1,5 +1,4 @@
 import MarkdownIt from 'markdown-it'
-import Hljs from 'highlight.js'
 
 const reposTransformer = repos => {
     const result = []

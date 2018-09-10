@@ -29,9 +29,9 @@ export const mutations = {
 
 export const actions = {
     fetchReposByUser(state, user) {
+        const url = `https://api.github.com/users/${user}/repos`
         state.commit('SET_REPOS_ERROR', '')
         state.commit('SET_REPOS_DATA', '')
-        const url = `https://api.github.com/users/${user}/repos`
         axios
             .get(url)
             .then(response => {

@@ -4,18 +4,12 @@
     <main role="main" class="pl-5 container">
       <h4 class="pt-3 pb-4">Projects</h4>
       <div class="pb-4">
-        <template v-if="error">
-          <div class="alert alert-danger">
-            <strong>{{ error }}</strong>
-          </div>
-        </template>
-        <template v-else>
-          <ul class="shadow list-group" v-if="repos">
-            <li @click="navigate(user, repo.name)" class="text-center border-0 p-4 list-group-item" :key="repo.name" v-for="repo in repos">
-              <span>{{repo.name}}</span>
-            </li>
-          </ul>
-        </template>
+        <error :error="error" v-if="error"/>
+        <ul v-else-if="repos" class="shadow list-group">
+          <li @click="navigate(user, repo.name)" class="text-center border-0 p-4 list-group-item" :key="repo.name" v-for="repo in repos">
+            <span>{{repo.name}}</span>
+          </li>
+        </ul>
       </div>
     </main>
   </section>
@@ -24,9 +18,11 @@
 <script>
 import { mapActions } from 'vuex'
 import TopNav from '~/components/nav'
+import Error from '~/components/error'
 export default {
   components: {
-    TopNav
+    TopNav,
+    Error
   },
   data() {
     return {
