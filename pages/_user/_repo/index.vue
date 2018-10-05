@@ -1,7 +1,8 @@
 <template>
   <section>
     <top-nav :title="name" :backAction="backAction" />
-    <main role="main" class="p-3 container">
+    <loader v-if="showLoader"/>
+    <main v-if="!showLoader" role="main" class="p-3 container">
       <error :error="error" v-if="error"/>
       <div v-else class="markdown-body shadow p-4 pt-3 pb-3" v-html="readme"></div>
     </main>
@@ -12,10 +13,12 @@
 import { mapActions } from 'vuex'
 import TopNav from '~/components/nav'
 import Error from '~/components/error'
+import Loader from '~/components/loader'
 export default {
   components: {
     TopNav,
-    Error
+    Error,
+    Loader
   },
   data() {
     return {
@@ -47,6 +50,9 @@ export default {
     },
     error() {
       return this.$store.state.github.repo.error
+    },
+    showLoader() {
+      return this.$store.state.github.showLoader
     }
   }
 }

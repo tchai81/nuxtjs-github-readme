@@ -2,6 +2,7 @@ import axios from 'axios'
 import { reposTransformer, repoTransformer } from '~/transformers/github'
 
 export const state = () => ({
+    showLoader: false,
     repos: {
         error: '',
         data: []
@@ -13,6 +14,9 @@ export const state = () => ({
 })
 
 export const mutations = {
+    SET_SHOW_LOADER(state, showLoader) {
+        state.showLoader = showLoader
+    },
     SET_REPOS_ERROR(state, error) {
         state.repos.error = error
     },
@@ -32,6 +36,7 @@ export const actions = {
         const url = `https://api.github.com/users/${user}/repos`
         state.commit('SET_REPOS_ERROR', '')
         state.commit('SET_REPOS_DATA', '')
+        state.commit('SET_SHOW_LOADER', true)
         axios
             .get(url)
             .then(response => {
@@ -43,12 +48,15 @@ export const actions = {
             })
             .catch(error => {
                 state.commit('SET_REPOS_ERROR', error.response.data.message)
+            }).then(() => {
+                state.commit('SET_SHOW_LOADER', false)
             })
     },
     fetchReadmeByRepoAndUser(state, repo) {
         const url = `https://api.github.com/repos/${repo.user}/${repo.name}/readme`
         state.commit('SET_REPO_ERROR', '')
         state.commit('SET_REPO_README', '')
+        state.commit('SET_SHOW_LOADER', true)
         axios
             .get(url)
             .then(response => {
@@ -61,6 +69,8 @@ export const actions = {
             })
             .catch(error => {
                 state.commit('SET_REPO_ERROR', error.response.data.message)
+            }).then(() => {
+                state.commit('SET_SHOW_LOADER', false)
             })
     }
 }
