@@ -4,22 +4,35 @@ module.exports = {
      */
     head: {
         title: 'Github Demo Project',
-        meta: [
-            { charset: 'utf-8' },
-            { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        meta: [{
+                charset: 'utf-8'
+            },
+            {
+                name: 'viewport',
+                content: 'width=device-width, initial-scale=1'
+            },
             {
                 hid: 'description',
                 name: 'description',
                 content: 'A single page application that displays a user&apos;s Github projects and let&apos;s you view the project&apos;s README.'
             }
         ],
-        link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+        link: [{
+            rel: 'icon',
+            type: 'image/x-icon',
+            href: '/favicon.ico'
+        }]
     },
     /*
      ** Customize the progress bar color
      */
-    loading: { color: '#3B8070' },
-    css: [{ src: 'github-markdown-css/github-markdown.css', lang: 'css' }],
+    loading: {
+        color: '#3B8070'
+    },
+    css: [{
+        src: 'github-markdown-css/github-markdown.css',
+        lang: 'css'
+    }],
     /*
      ** Build configuration
      */
@@ -27,12 +40,18 @@ module.exports = {
         /*
          ** Run ESLint on save
          */
-        extend(config, { isDev, isClient }) {
+        extend(config, { isDev }) {
             // svg loader
-            const svgRule = config.module.rules.find(rule => rule.loader === 'url-loader')
-            svgRule.test = /\.(png|jpe?g|gif)$/
-            config.module.rules.push({ test: /\.svg$/, loader: 'vue-svg-loader' })
-            if (isDev && isClient) {
+            const svgRule = config.module.rules.find(rule => rule.test.test('.svg'));
+
+            svgRule.test = /\.(png|jpe?g|gif|webp)$/;
+
+            config.module.rules.push({
+                test: /\.svg$/,
+                loader: 'vue-svg-loader',
+            });
+
+            if (isDev && process.client) {
                 config.module.rules.push({
                     enforce: 'pre',
                     test: /\.(js|vue)$/,
